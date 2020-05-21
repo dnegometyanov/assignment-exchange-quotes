@@ -11,8 +11,8 @@ services:
             args:
                 TIMEZONE: ${TIMEZONE}
         volumes:
-            - ${SYMFONY_APP_PATH}:/var/www/symfony
-            - ./logs/symfony:/var/www/symfony/app/logs
+            - ${SYMFONY_APP_PATH}:/var/www/symfony:rw,cached
+            - ./logs/symfony:/var/www/symfony/app/logs:rw,cached
     nginx:
         build: docker/nginx
         ports:
@@ -26,8 +26,8 @@ services:
         ports:
             - 81:80
         volumes:
-            - .docker/elk/logstash:/etc/logstash
-            - .docker/elk/logstash/patterns:/opt/logstash/patterns
+            - .docker/elk/logstash:/etc/logstash:rw,cached
+            - .docker/elk/logstash/patterns:/opt/logstash/patterns:rw,cached
         volumes_from:
             - php
             - nginx
