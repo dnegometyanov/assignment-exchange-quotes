@@ -22,6 +22,14 @@ dump-autoload:
 run-server:
 	@docker-compose up -d
 
+## Migrate
+migrate:
+	@docker-compose run php bin/console doctrine:migrations:migrate
+
+## Import listing
+import-listing:
+	@docker-compose run php bin/console app:listing:import
+
 ## Run messenger workers with log
 run-messenger-workers-with-log:
 	@docker-compose run php bin/console messenger:consume -vv async

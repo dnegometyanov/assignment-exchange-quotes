@@ -69,7 +69,15 @@ If dist files are not copied to actual destination, then
 #### Run docker containers
 
     make run-server
-    
+
+#### Import listing (symbols to company names table)
+
+    make migrate
+
+#### Import listing (symbols to company names table)
+
+    make import-listing
+
 #### Run symfony messenger workers for background processing (preferably with logs), and keep console window opened
 
     make run-messenger-workers-with-log
