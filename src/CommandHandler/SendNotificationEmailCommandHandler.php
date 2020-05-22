@@ -23,11 +23,6 @@ class SendNotificationEmailCommandHandler
      */
     private \Swift_Mailer $mailer;
 
-    /**
-     * @var string
-     */
-    private string $xRapidApiKey;
-
     public function __construct(
         HistoricalQuotesTaskRepositoryInterface $taskRepository,
         EntityManagerInterface $em,
@@ -43,10 +38,16 @@ class SendNotificationEmailCommandHandler
     {
         $task = $this->taskRepository->find($command->getTaskUuid());
 
-        $message = (new \Swift_Message('Hello Email'))
+        $message = (new \Swift_Message($command->getCompanyName()))
             ->setFrom('denis.negometyanov@gmail.com')
-            ->setTo('denis.negometyanov@gmail.com')
-            ->setBody('Hello World');
+            ->setTo($command->getEmail())
+            ->setBody(
+                sprintf(
+                    'From %s to %s',
+                    $command->getDateFrom(),
+                    $command->getDateTo()
+                )
+            );
 
         $res = $this->mailer->send($message);
 
