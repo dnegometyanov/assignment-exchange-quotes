@@ -42,5 +42,10 @@ services:
 
     handler.task.get_and_quotes_handler:
         class: App\CommandHandler\GetAndUpdateHistoricalQuotesCommandHandler
+        arguments:
+            - '@App\Repository\HistoricalQuotesTaskRepositoryInterface'
+            - '@Doctrine\ORM\EntityManagerInterface'
+            - '@Symfony\Contracts\HttpClient\HttpClientInterface'
+            - '%env(string:QUOTES_SERVICE_HEADER_X_RAPIDAPI_KEY)%'
         tags:
             - { name: tactician.handler, command: App\Command\GetAndUpdateHistoricalQuotesCommand }

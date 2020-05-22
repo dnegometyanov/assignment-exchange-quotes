@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use App\Repository\TaskRepository;
-use DateTime as DateTime;
 use DateTimeImmutable as DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -12,7 +10,7 @@ use Ramsey\Uuid\UuidInterface as UuidInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=TaskRepository::class)
+ * @ORM\Entity(repositoryClass=HistoricalQuotesTaskRepository::class)
  */
 class HistoricalQuotesTask
 {

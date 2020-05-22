@@ -3,15 +3,16 @@
 namespace App\Repository;
 
 use App\Entity\HistoricalQuotesTask;
-use App\Entity\Listing;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @inheritDoc
+ * @method HistoricalQuotesTask|null find($id, $lockMode = null, $lockVersion = null)
+ * @method HistoricalQuotesTask|null findOneBy(array $criteria, array $orderBy = null)
+ * @method HistoricalQuotesTask[]    findAll()
+ * @method HistoricalQuotesTask[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TaskRepository extends ServiceEntityRepository implements TaskRepositoryInterface
+class HistoricalQuotesTaskRepository extends ServiceEntityRepository implements HistoricalQuotesTaskRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
