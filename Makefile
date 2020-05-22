@@ -18,10 +18,15 @@ copy-dist-configs:
 dump-autoload:
 	@docker-compose run --rm --no-deps php composer dump-autoload
 
-## Run default game (2 players 3 moves)
+## Run server
 run-server:
-	@docker-compose run --rm --no-deps php php src/index.php
+	@docker-compose up -d
 
+## Run messenger workers with log
+run-messenger-workers-with-log:
+	@docker-compose run php bin/console messenger:consume -vv async
+
+docker-compose run php bin/console messenger:consume -vv async
 ## Run all tests
 all-tests:
 	make unit-tests
