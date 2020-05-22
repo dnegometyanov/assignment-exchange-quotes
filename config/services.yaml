@@ -49,3 +49,9 @@ services:
             - '%env(string:QUOTES_SERVICE_HEADER_X_RAPIDAPI_KEY)%'
         tags:
             - { name: tactician.handler, command: App\Command\GetAndUpdateHistoricalQuotesCommand }
+
+    handler.task.send_notification_email_handler:
+        class: App\CommandHandler\SendNotificationEmailCommandHandler
+        tags:
+            - { name: tactician.handler, command: App\Command\SendNotificationEmailCommand }
+
