@@ -33,6 +33,20 @@ class HistoricalQuotesTask
         $this->updatedAt = new DateTimeImmutable();
     }
 
+    public function setData(array $data): HistoricalQuotesTask
+    {
+        $this->data = $data;
+
+        return $this;
+    }
+
+    public function setIsNotified(bool $isNotified): HistoricalQuotesTask
+    {
+        $this->isNotified = $isNotified;
+
+        return $this;
+    }
+
     /**
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)

@@ -1,11 +1,13 @@
 <?php
-namespace App\Handler;
+namespace App\CommandHandler;
 
 use App\Command\CreateHistoricalQuotesTaskCommand;
 use App\Entity\HistoricalQuotesTask;
+use App\Message\HistoricalQuotesRequestEvent;
 use App\Repository\TaskRepository;
 use DateTimeImmutable as DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class CreateHistoricalQuotesTaskCommandHandler
 {
@@ -17,11 +19,19 @@ class CreateHistoricalQuotesTaskCommandHandler
      * @var EntityManagerInterface
      */
     private EntityManagerInterface $em;
+    /**
+     * @var MessageBusInterface
+     */
+    private MessageBusInterface $bus;
 
-    public function __construct(TaskRepository $taskRepository, EntityManagerInterface $em)
+    public function __construct(
+        TaskRepository $taskRepository,
+        EntityManagerInterface $em,
+        MessageBusInterface $bus)
     {
         $this->taskRepository = $taskRepository;
-        $this->em = $em;
+        $this->em             = $em;
+        $this->bus            = $bus;
     }
 
     public function handle(CreateHistoricalQuotesTaskCommand $command)
@@ -35,6 +45,15 @@ class CreateHistoricalQuotesTaskCommandHandler
 
         $this->em->persist($task);
         $this->em->flush();
+
+        $this->bus->dispatch(
+            new HistoricalQuotesRequestEvent(
+                $task->getUuid(),
+                $command->getSymbol(),
+                $command->getDateFrom(),
+                $command->getDateTo(),
+            )
+        );
 
         return $task;
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Handler;
+namespace App\CommandHandler;
 
 use App\Command\ImportListingCommand;
 use App\Entity\Listing;
