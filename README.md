@@ -14,9 +14,12 @@ The user flow is of following steps:
 1) User submits form (i.e. `POST` api request) - so the `historical_quotes_task` item is created and its UUID is returned
  - No heavy synchronous for third party services as Quotes and Email are executed,
   but tasks for them added to Queue for asynchronous processing by background workers.
-2) Used immediately redirected to Task pages, where frontend periodically checks status (`GET` request for statuses)  of async background tasks.
-3) After async background tasks do their job and fill in fields `historical_quotes_task`,
- frontend gets ready statuses for both tasks, retrieves data (`GET` request for quotes retrieval) for quotes and displays table and chart.
+2) User is immediately redirected to Task page, where frontend periodically checks status (`GET` request for statuses)
+ of async background tasks.
+3) Async background tasks do their job and fill in fields of `historical_quotes_task` entry,
+ so frontend receives ready statuses for both tasks
+4) As in (3) quotes data was stored on `historical_quotes_task` entry,
+ frontend just gets them (`GET` request for quotes retrieval) and displays table and chart.
  
 ## Technical implementation notes
 
