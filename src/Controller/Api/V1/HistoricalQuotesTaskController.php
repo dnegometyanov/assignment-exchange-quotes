@@ -4,7 +4,9 @@ namespace App\Controller\Api\V1;
 
 use App\Command\CreateHistoricalQuotesTaskCommand;
 use App\Entity\HistoricalQuotesTask;
+use App\QueryService\HistoricalQuotesTaskQueryInterface;
 use League\Tactician\CommandBus;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,7 +26,7 @@ class HistoricalQuotesTaskController
      * @param CommandBus $commandBus
      * @return JsonResponse
      */
-    public function createTask(Request $request, ValidatorInterface $validator, CommandBus $commandBus)
+    public function createTask(Request $request, ValidatorInterface $validator, CommandBus $commandBus): JsonResponse
     {
         $command = new CreateHistoricalQuotesTaskCommand(
             $request->get('symbol'),
@@ -54,5 +56,42 @@ class HistoricalQuotesTaskController
         $task = $commandBus->handle($command);
 
         return new JsonResponse(['task_uuid' => $task->getUuid()]);
+    }
+
+    /**
+     * @Route("/{uuid}/status", methods={"GET"}, name="get_historical_quotes_task_status")
+     *
+     * @param string $uuid
+     * @param HistoricalQuotesTaskQueryInterface $historicalQuotesTaskQuery
+     *
+     * @return JsonResponse
+     */
+    public function getTaskStatus(string $uuid, HistoricalQuotesTaskQueryInterface $historicalQuotesTaskQuery): JsonResponse
+    {
+        $task = $historicalQuotesTaskQuery->query(Uuid::fromString($uuid));
+
+        return new JsonResponse(
+            [
+                'is_retrieved_quotes' => !empty($task->getData()),
+                'is_notified'         => $task->isNotified(),
+            ]
+        );
+    }
+
+    /**
+     * @Route("/{uuid}/quotes", methods={"GET"}, name="get_historical_quotes_task_quotes")
+     *
+     * @param string $uuid
+     * @param HistoricalQuotesTaskQueryInterface $historicalQuotesTaskQuery
+     *
+     * @return JsonResponse
+     */
+    public function getQuotes(string $uuid, HistoricalQuotesTaskQueryInterface $historicalQuotesTaskQuery): JsonResponse
+    {
+        $task = $historicalQuotesTaskQuery->query(Uuid::fromString($uuid));
+
+        return new JsonResponse(
+            $task->getData()
+        );
     }
 }

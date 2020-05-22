@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\HistoricalQuotesTask;
-use Doctrine\ORM\NonUniqueResultException;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * @method HistoricalQuotesTask|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,11 +14,9 @@ use Doctrine\ORM\NonUniqueResultException;
 interface HistoricalQuotesTaskRepositoryInterface
 {
     /**
-     * @param string $symbol
+     * @param UuidInterface $uuid
      *
      * @return HistoricalQuotesTask|null
-     *
-     * @throws NonUniqueResultException
      */
-    public function findOneBySymbol(string $symbol): ?HistoricalQuotesTask;
+    public function findOneByUuid(UuidInterface $uuid): ?HistoricalQuotesTask;
 }
