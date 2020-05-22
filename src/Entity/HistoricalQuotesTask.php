@@ -29,6 +29,8 @@ class HistoricalQuotesTask
         $this->isNotified = false;
         $this->createdAt = new DateTime();
         $this->updatedAt = new DateTime();
+
+        $this->data = null;
     }
 
     public function setData(array $data): HistoricalQuotesTask
@@ -91,7 +93,7 @@ class HistoricalQuotesTask
      *
      * @ORM\Column(type="json", nullable=true, options={"default":null})
      */
-    private array $data;
+    private ?array $data;
 
     /**
      *
@@ -138,9 +140,9 @@ class HistoricalQuotesTask
     }
 
     /**
-     * @return array
+     * @return array|null
      */
-    public function getData(): array
+    public function getData(): ?array
     {
         return $this->data;
     }

@@ -72,7 +72,7 @@ class HistoricalQuotesTaskController
 
         return new JsonResponse(
             [
-                'is_retrieved_quotes' => !empty($task->getData()),
+                'is_retrieved_quotes' => null !== $task->getData(),
                 'is_notified'         => $task->isNotified(),
             ]
         );
