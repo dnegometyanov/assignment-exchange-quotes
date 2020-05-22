@@ -23,5 +23,23 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    # console commands
+    App\Console\:
+        resource: '../src/Console'
+        tags: ['console.command']
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    handler.task.create_historical_quotes_task_handler:
+        class: App\Handler\CreateHistoricalQuotesTaskCommandHandler
+        #        arguments:
+        #            - '@foo.user.user_repository'
+        tags:
+            - { name: tactician.handler, command: App\Command\CreateHistoricalQuotesTaskCommand }
+
+    handler.listing.import:
+        class: App\Handler\ImportListingCommandHandler
+        #        arguments:
+        #            - '@foo.user.user_repository'
+        tags:
+            - { name: tactician.handler, command: App\Command\ImportListingCommand }
