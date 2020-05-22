@@ -7,7 +7,7 @@ use App\Message\EmailNotificationEvent;
 use App\Message\HistoricalQuotesRequestEvent;
 use App\Repository\HistoricalQuotesTaskRepositoryInterface;
 use App\Repository\ListingRepository;
-use DateTimeImmutable as DateTimeImmutable;
+use DateTime as DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -46,8 +46,8 @@ class CreateHistoricalQuotesTaskCommandHandler
     {
         $task = new HistoricalQuotesTask(
             $command->getSymbol(),
-            new DateTimeImmutable($command->getDateFrom()),
-            new DateTimeImmutable($command->getDateTo()),
+            new DateTime($command->getDateFrom()),
+            new DateTime($command->getDateTo()),
             $command->getEmail(),
         );
 

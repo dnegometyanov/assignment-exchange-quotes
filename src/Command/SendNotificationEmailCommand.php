@@ -26,11 +26,11 @@ class SendNotificationEmailCommand
     private string $companyName;
 
     /**
-     * @Assert\Date
+     * @Assert\Date()
      */
     private string $dateFrom;
     /**
-     * @Assert\Date
+     * @Assert\Date()
      *
      * @Assert\GreaterThan(propertyPath="dateFrom")
      */

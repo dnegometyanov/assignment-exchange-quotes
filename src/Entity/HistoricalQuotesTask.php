@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use DateTimeImmutable as DateTimeImmutable;
+use DateTime as DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
@@ -16,8 +16,8 @@ class HistoricalQuotesTask
 {
     public function __construct(
         string $symbol,
-        DateTimeImmutable $dateFrom,
-        DateTimeImmutable $dateTo,
+        DateTime $dateFrom,
+        DateTime $dateTo,
         string $email
     )
     {
@@ -27,8 +27,8 @@ class HistoricalQuotesTask
         $this->email = $email;
 
         $this->isNotified = false;
-        $this->createdAt = new DateTimeImmutable();
-        $this->updatedAt = new DateTimeImmutable();
+        $this->createdAt = new DateTime();
+        $this->updatedAt = new DateTime();
     }
 
     public function setData(array $data): HistoricalQuotesTask
@@ -66,7 +66,7 @@ class HistoricalQuotesTask
      * @Assert\Date
      * @Assert\NotBlank()
      */
-    private DateTimeImmutable $dateFrom;
+    private DateTime $dateFrom;
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
@@ -74,7 +74,7 @@ class HistoricalQuotesTask
      * @Assert\Date
      * @Assert\NotBlank()
      */
-    private DateTimeImmutable $dateTo;
+    private DateTime $dateTo;
 
     /**
      * @ORM\Column(type="string", nullable=false)
@@ -104,14 +104,14 @@ class HistoricalQuotesTask
      * @Assert\NotBlank()
      * @ORM\Column(type="datetime")
      */
-    private DateTimeImmutable $createdAt;
+    private DateTime $createdAt;
 
     /**
      * @Gedmo\Timestampable(on="update")
      * @Assert\NotBlank()
      * @ORM\Column(type="datetime")
      */
-    private DateTimeImmutable $updatedAt;
+    private DateTime $updatedAt;
 
     /**
      * @return UuidInterface
@@ -122,17 +122,17 @@ class HistoricalQuotesTask
     }
 
     /**
-     * @return DateTimeImmutable
+     * @return DateTime
      */
-    public function getDateFrom(): DateTimeImmutable
+    public function getDateFrom(): DateTime
     {
         return $this->dateFrom;
     }
 
     /**
-     * @return DateTimeImmutable
+     * @return DateTime
      */
-    public function getDateTo(): DateTimeImmutable
+    public function getDateTo(): DateTime
     {
         return $this->dateTo;
     }
@@ -154,17 +154,17 @@ class HistoricalQuotesTask
     }
 
     /**
-     * @return DateTimeImmutable
+     * @return DateTime
      */
-    public function getCreatedAt(): DateTimeImmutable
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
     /**
-     * @return DateTimeImmutable
+     * @return DateTime
      */
-    public function getUpdatedAt(): DateTimeImmutable
+    public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }

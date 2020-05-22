@@ -63,8 +63,8 @@ class GetAndUpdateHistoricalQuotesCommandHandler
                     'frequency' => '1d',
                     'filter'    => 'history',
                     'symbol'    => $command->getSymbol(),
-                    'period1'   => (new \DateTimeImmutable($command->getDateFrom()))->getTimestamp(),
-                    'period2'   => (new \DateTimeImmutable($command->getDateTo()))->getTimestamp(),
+                    'period1'   => (new \DateTime($command->getDateFrom()))->getTimestamp(),
+                    'period2'   => (new \DateTime($command->getDateTo()))->getTimestamp(),
                 ],
             ]
         );
