@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 namespace App\CommandHandler;
 
 use App\Command\GetAndUpdateHistoricalQuotesCommand;
@@ -11,7 +11,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class GetAndUpdateHistoricalQuotesCommandHandler
 {
     const QUOTES_SERVICE_GET_HISTORICAL_QUOTES_URL = 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-historical-data';
-    const QUOTES_SERVICE_HEADER_X_RAPIDAPI_HOST = 'apidojo-yahoo-finance-v1.p.rapidapi.com';
+    const QUOTES_SERVICE_HEADER_X_RAPIDAPI_HOST    = 'apidojo-yahoo-finance-v1.p.rapidapi.com';
 
     /**
      * @var HistoricalQuotesTaskRepositoryInterface

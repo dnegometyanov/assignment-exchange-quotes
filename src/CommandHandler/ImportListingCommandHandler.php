@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\CommandHandler;
 
@@ -31,7 +31,7 @@ class ImportListingCommandHandler
         $this->em                = $em;
     }
 
-    public function handle(ImportListingCommand $command)
+    public function handle(ImportListingCommand $command): void
     {
         $jsonContent = file_get_contents(self::DATA_SOURCE_URL);
         $listingData = \json_decode($jsonContent, true);

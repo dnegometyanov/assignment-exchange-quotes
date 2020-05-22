@@ -1,9 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Console;
 
 use App\Command\ImportListingCommand;
-use Doctrine\ORM\EntityManagerInterface;
 use League\Tactician\CommandBus;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -25,7 +24,7 @@ class ImportListingConsoleCommand extends Command
         $this->commandBus = $commandBus;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('app:listing:import')

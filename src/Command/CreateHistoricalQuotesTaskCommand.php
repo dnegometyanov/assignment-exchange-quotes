@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Command;
 
@@ -13,10 +13,10 @@ class CreateHistoricalQuotesTaskCommand
         string $email
     )
     {
-        $this->symbol = $symbol;
+        $this->symbol   = $symbol;
         $this->dateFrom = $dateFrom;
-        $this->dateTo = $dateTo;
-        $this->email = $email;
+        $this->dateTo   = $dateTo;
+        $this->email    = $email;
     }
 
     /**

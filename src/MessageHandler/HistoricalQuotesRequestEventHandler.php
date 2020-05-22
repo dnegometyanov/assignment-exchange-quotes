@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\MessageHandler;
 
@@ -24,10 +24,10 @@ class HistoricalQuotesRequestEventHandler implements MessageHandlerInterface
     public function __construct(CommandBus $commandBus, ValidatorInterface $validator)
     {
         $this->commandBus = $commandBus;
-        $this->validator = $validator;
+        $this->validator  = $validator;
     }
 
-    public function __invoke(HistoricalQuotesRequestEvent $historicalQuotesRequestEvent)
+    public function __invoke(HistoricalQuotesRequestEvent $historicalQuotesRequestEvent): void
     {
         $command = new GetAndUpdateHistoricalQuotesCommand(
             $historicalQuotesRequestEvent->getTaskUuid(),

@@ -1,8 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\TaskRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -16,15 +15,15 @@ class Listing
         string $companyName
     )
     {
-        $this->symbol = $symbol;
+        $this->symbol      = $symbol;
         $this->companyName = $companyName;
     }
 
     public function update(
         string $symbol,
         string $companyName
-    )  {
-        $this->symbol = $symbol;
+    ): void  {
+        $this->symbol      = $symbol;
         $this->companyName = $companyName;
     }
 

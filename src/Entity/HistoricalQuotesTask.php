@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -21,14 +21,14 @@ class HistoricalQuotesTask
         string $email
     )
     {
-        $this->symbol = $symbol;
+        $this->symbol   = $symbol;
         $this->dateFrom = $dateFrom;
-        $this->dateTo = $dateTo;
-        $this->email = $email;
+        $this->dateTo   = $dateTo;
+        $this->email    = $email;
 
         $this->isNotified = false;
-        $this->createdAt = new DateTime();
-        $this->updatedAt = new DateTime();
+        $this->createdAt  = new DateTime();
+        $this->updatedAt  = new DateTime();
 
         $this->data = null;
     }

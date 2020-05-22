@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Controller\Api\V1;
 
@@ -24,6 +24,7 @@ class HistoricalQuotesTaskController
      * @param Request $request
      * @param ValidatorInterface $validator
      * @param CommandBus $commandBus
+     *
      * @return JsonResponse
      */
     public function createTask(Request $request, ValidatorInterface $validator, CommandBus $commandBus): JsonResponse

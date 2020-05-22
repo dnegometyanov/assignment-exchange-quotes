@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\MessageHandler;
 
@@ -27,7 +27,7 @@ class EmailNotificationEventHandler implements MessageHandlerInterface
         $this->validator  = $validator;
     }
 
-    public function __invoke(EmailNotificationEvent $emailNotificationEvent)
+    public function __invoke(EmailNotificationEvent $emailNotificationEvent): void
     {
         $command = new SendNotificationEmailCommand(
             $emailNotificationEvent->getTaskUuid(),

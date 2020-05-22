@@ -1,8 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Entity\HistoricalQuotesTask;
 use App\Entity\Listing;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
@@ -24,9 +23,10 @@ class ListingRepository extends ServiceEntityRepository implements ListingReposi
     /**
      * @param string $symbol
      *
+     * @throws NonUniqueResultException
+     *
      * @return Listing|null
      *
-     * @throws NonUniqueResultException
      */
     public function findOneBySymbol(string $symbol): ?Listing
     {
