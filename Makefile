@@ -7,13 +7,6 @@ build:
 vendors-install:
 	@docker-compose run --rm --no-deps php composer install
 
-## Copy dist files to actual path (if not present yet)
-copy-dist-configs:
-	@docker-compose run --rm --no-deps php cp -n .env.dist .env
-	@docker-compose run --rm --no-deps php cp -n phpunit.xml.dist phpunit.xml
-	@docker-compose run --rm --no-deps php cp -n phpstan.neon.dist phpstan.neon
-	@docker-compose run --rm --no-deps php cp -n .php_cs.dist .php_cs
-
 ## Update composer autoload
 dump-autoload:
 	@docker-compose run --rm --no-deps php composer dump-autoload

@@ -37,6 +37,10 @@ The user flow is of following steps:
 4) For asynchronous processing of Quotes retrieving and Email task, Symfony Messenger is used https://symfony.com/doc/current/components/messenger.html
 It's configured for doctrine transport bus, for the sake of simplicity, however it could be easily changed to more production ready implementation as `Amqp` 
  
+## TODOs (have not implemented before the deadline because of lack if time)
+ - Unit / Functional tests
+ - Quotes pagination
+
 ## Project setup on the development machine
 
 #### Prerequisites
@@ -58,7 +62,10 @@ It's configured for doctrine transport bus, for the sake of simplicity, however 
 
 If dist files are not copied to actual destination, then
     
-    make copy-dist-configs
+    cp -n .env.dist .env
+    cp -n phpunit.xml.dist phpunit.xml
+    cp -n phpstan.neon.dist phpstan.neon
+    cp -n .php_cs.dist .php_cs
         
 #### Manually add tokens for Mailgun email service and Rapidapi exchange quotes service
 
