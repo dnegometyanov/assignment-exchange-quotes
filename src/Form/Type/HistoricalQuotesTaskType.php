@@ -37,7 +37,7 @@ class HistoricalQuotesTaskType extends AbstractType
                         new LessThanOrEqual((new \DateTimeImmutable())->format('Y-m-d'))
                     ],
                     'widget' => 'single_text',
-                    'data' => (new \DateTime("now"))->modify('- 1 month'),
+                    'data'   => (new \DateTime("now"))->modify('- 1 month'),
         ])
             ->add('dateTo', DateType::class,
                 [
@@ -47,7 +47,7 @@ class HistoricalQuotesTaskType extends AbstractType
                         new LessThanOrEqual((new \DateTimeImmutable())->format('Y-m-d'))
                     ],
                     'widget' => 'single_text',
-                    'data' => new \DateTime("now"),
+                    'data'   => new \DateTime("now"),
                 ])
             ->add('email', EmailType::class,
                 [
