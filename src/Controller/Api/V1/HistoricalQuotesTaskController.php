@@ -29,33 +29,39 @@ class HistoricalQuotesTaskController
      */
     public function createTask(Request $request, ValidatorInterface $validator, CommandBus $commandBus): JsonResponse
     {
-        $command = new CreateHistoricalQuotesTaskCommand(
-            $request->get('symbol'),
-            $request->get('date_from'),
-            $request->get('date_to'),
-            $request->get('email'),
-        );
+        try {
 
-        /**
-         * @var ConstraintViolationList
-         */
-        $violations = $validator->validate($command);
 
-        if (count($violations) != 0) {
-            $errors = [];
-            foreach ($violations as $violation) {
-                $errors[] = [
-                    'path'    => $violation->getPropertyPath(),
-                    'message' => $violation->getMessage(),
-                ];
+            $command = new CreateHistoricalQuotesTaskCommand(
+                $request->get('symbol'),
+                $request->get('date_from'),
+                $request->get('date_to'),
+                $request->get('email'),
+            );
+
+            /**
+             * @var ConstraintViolationList
+             */
+            $violations = $validator->validate($command);
+
+            if (count($violations) != 0) {
+                $errors = [];
+                foreach ($violations as $violation) {
+                    $errors[] = [
+                        'path'    => $violation->getPropertyPath(),
+                        'message' => $violation->getMessage(),
+                    ];
+                }
+
+                return new JsonResponse(['errors' => $errors], 400);
             }
 
-            return new JsonResponse(['errors' => $errors], 400);
+            /** @var HistoricalQuotesTask $task */
+            $task = $commandBus->handle($command);
+        } catch (\RuntimeException $e) {
+            return new JsonResponse(['errors' => [$e->getMessage()]], 400);
+
         }
-
-        /** @var HistoricalQuotesTask $task */
-        $task = $commandBus->handle($command);
-
         return new JsonResponse(['task_uuid' => $task->getUuid()]);
     }
 
