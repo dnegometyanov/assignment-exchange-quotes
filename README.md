@@ -90,7 +90,7 @@ It's configured for doctrine transport bus, for the sake of simplicity, however 
 
     make build
 
-#### Build container and install composer dependencies
+#### Copy dist to configs
 
 If dist files are not copied to actual destination, then
     
@@ -109,13 +109,21 @@ If dist files are not copied to actual destination, then
 
     make run-server
 
-#### Import listing (symbols to company names table)
+#### Migrate
 
     make migrate
 
 #### Import listing (symbols to company names table)
 
     make import-listing
+
+#### Publish FE assets
+
+Uses encore, so needs some basic setup on host machine for FE
+
+See https://symfony.com/doc/current/frontend/encore/installation.html
+
+    yarn encore dev
 
 #### Run symfony messenger workers for background processing (preferably with logs), and keep console window opened
 
