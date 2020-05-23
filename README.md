@@ -40,6 +40,7 @@ It's configured for doctrine transport bus, for the sake of simplicity, however 
 ## TODOs (have not implemented before the deadline because of lack if time)
  - Unit / Functional tests
  - Quotes pagination
+ - Frontend validation
 
 ## API endpoints
 
