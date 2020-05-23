@@ -7,6 +7,8 @@ services:
             - 3307:3306
         volumes:
             - "./.data/db:/var/lib/mysql"
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     php:
         build:
             context: docker/php7-fpm
