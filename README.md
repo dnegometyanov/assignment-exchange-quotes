@@ -58,6 +58,20 @@ It's configured for doctrine transport bus, for the sake of simplicity, however 
         date_to=2020-01-31
         email=email@example.com
 
+#### Get task status API endpoint
+    GET /api/v1/task/{uuid}/status
+    
+    EXAMPLE
+    
+    GET /api/v1/task/0ce42f04-0da1-4766-83b8-cefc10e424e0/status
+
+#### Get task quotes API endpoint
+    GET /api/v1/task/{uuid}/quotes
+    
+    EXAMPLE
+    
+    GET /api/v1/task/0ce42f04-0da1-4766-83b8-cefc10e424e0/quotes
+    
 ## Project setup on the development machine
 
 #### Prerequisites
@@ -86,7 +100,7 @@ If dist files are not copied to actual destination, then
         
 #### Manually add tokens for Mailgun email service and Rapidapi exchange quotes service
 
-    On .env in MAILER_DSN replace MAILGUN_USERNAME and MAILGUN_PASSWORD to youe credentials
+    On .env in MAILER_DSN replace MAILGUN_USERNAME and MAILGUN_PASSWORD to your credentials
     
     On .env in QUOTES_SERVICE_HEADER_X_RAPIDAPI_KEY set value to your key
     
