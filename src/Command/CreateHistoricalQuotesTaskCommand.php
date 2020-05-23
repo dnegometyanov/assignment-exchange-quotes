@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use DateTime as DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class CreateHistoricalQuotesTaskCommand
@@ -26,12 +27,15 @@ class CreateHistoricalQuotesTaskCommand
 
     /**
      * @Assert\Date
+     * @Assert\NotBlank
+     * @Assert\LessThanOrEqual(propertyPath="todayAsString")
      */
     private string $dateFrom;
 
     /**
      * @Assert\Date
-     *
+     * @Assert\NotBlank
+     * @Assert\LessThanOrEqual(propertyPath="todayAsString")
      * @Assert\GreaterThan(propertyPath="dateFrom")
      */
     private string $dateTo;
@@ -74,5 +78,13 @@ class CreateHistoricalQuotesTaskCommand
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTodayAsString(): string
+    {
+        return (new DateTime())->format('Y-m-d');
     }
 }

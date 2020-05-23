@@ -19,11 +19,14 @@ class GetAndUpdateHistoricalQuotesCommand
 
     /**
      * @Assert\Date
+     * @Assert\NotBlank
+     * @Assert\LessThanOrEqual("today")
      */
     private string $dateFrom;
     /**
      * @Assert\Date
-     *
+     * @Assert\NotBlank
+     * @Assert\LessThanOrEqual("today")
      * @Assert\GreaterThan(propertyPath="dateFrom")
      */
     private string $dateTo;

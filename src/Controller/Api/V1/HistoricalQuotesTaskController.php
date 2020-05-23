@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class HistoricalQuotesTaskController
 {
     /**
-     * @Route("/", methods={"POST"}, name="create_historical_quotes_task")
+     * @Route("/", methods={"POST"}, name="api_create_historical_quotes_task")
      *
      * @param Request $request
      * @param ValidatorInterface $validator
@@ -60,7 +60,7 @@ class HistoricalQuotesTaskController
     }
 
     /**
-     * @Route("/{uuid}/status", methods={"GET"}, name="get_historical_quotes_task_status")
+     * @Route("/{uuid}/status", methods={"GET"}, name="api_get_historical_quotes_task_status")
      *
      * @param string $uuid
      * @param HistoricalQuotesTaskQueryInterface $historicalQuotesTaskQuery
@@ -80,7 +80,7 @@ class HistoricalQuotesTaskController
     }
 
     /**
-     * @Route("/{uuid}/quotes", methods={"GET"}, name="get_historical_quotes_task_quotes")
+     * @Route("/{uuid}", methods={"GET"}, name="api_get_historical_quotes_task_quotes")
      *
      * @param string $uuid
      * @param HistoricalQuotesTaskQueryInterface $historicalQuotesTaskQuery

@@ -10,7 +10,7 @@ use Ramsey\Uuid\UuidInterface as UuidInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=HistoricalQuotesTaskRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\HistoricalQuotesTaskRepository")
  */
 class HistoricalQuotesTask
 {
@@ -66,7 +66,8 @@ class HistoricalQuotesTask
      * @ORM\Column(type="datetime", nullable=false)
      *
      * @Assert\Date
-     * @Assert\NotBlank()
+     * @Assert\NotBlank
+     * @Assert\LessThanOrEqual("today")
      */
     private DateTime $dateFrom;
 
@@ -74,7 +75,9 @@ class HistoricalQuotesTask
      * @ORM\Column(type="datetime", nullable=false)
      *
      * @Assert\Date
-     * @Assert\NotBlank()
+     * @Assert\NotBlank
+     * @Assert\LessThanOrEqual("today")
+     * @Assert\GreaterThan(propertyPath="dateFrom")
      */
     private DateTime $dateTo;
 
