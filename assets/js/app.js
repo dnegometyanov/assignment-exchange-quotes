@@ -46,6 +46,7 @@ $(document).ready(function () {
 
                         $(".datatable").DataTable({
                             data: quotes,
+                            "searching": false,
                             columns: [
                                 {title: "Date", data: "dateString"},
                                 {title: "Open", data: "open"},
