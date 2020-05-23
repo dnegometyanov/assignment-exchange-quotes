@@ -8,11 +8,14 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import '../css/app.css';
 import '../bootstrap/dist/css/bootstrap.css'; // TODO below line should import from vendors, but not working, adding bootstrap files here works:(
+// import 'bootstrap';
+
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 import $ from 'jquery';
 import dt from 'datatables.net';
 import 'datatables.net-dt/css/jquery.datatables.css';
 // import 'bootstrap';
+// import '../dist/jquery.canvasjs.min.js'
 
 $(document).ready(function () {
     $("#historical_quotes_task_listing option:contains(AMZN)").attr('selected', 'selected');
@@ -32,12 +35,19 @@ $(document).ready(function () {
                     }).done(function (quotes) {
                         console.log(quotes);
 
+                        quotes.forEach(function (element) {
+                            element.dateString = (new Date(element.date * 1000)).toISOString().slice(0,10);
+                            element.dateObject = new Date(element.date * 1000);
+                        });
+
+                        console.log(quotes);
+
                         $("#wait").hide();
 
                         $(".datatable").DataTable({
                             data: quotes,
                             columns: [
-                                {title: "Date1", data: "date"},
+                                {title: "Date", data: "dateString"},
                                 {title: "Open", data: "open"},
                                 {title: "High", data: "high"},
                                 {title: "Low", data: "low"},
@@ -45,6 +55,31 @@ $(document).ready(function () {
                                 {title: "Volume", data: "volume"},
                             ]
                         });
+
+
+                        var dataPointsOpen = quotes.map(function(quote) { return {x: quote.dateObject, y: quote.open}});
+                        var dataPointsClose = quotes.map(function(quote) { return {x: quote.dateObject, y: quote.close}});
+
+                        console.log(dataPointsOpen);
+
+                        var chart = new CanvasJS.Chart("chartContainer", {
+                            theme: "light1", // "light2", "dark1", "dark2"
+                            animationEnabled: false, // change to true
+                            title:{
+                                text: "Basic Column Chart"
+                            },
+                            data: [
+                                {
+                                    type: "line",
+                                    dataPoints: dataPointsOpen
+                                },
+                                {
+                                    type: "line",
+                                    dataPoints: dataPointsClose
+                                }
+                            ]
+                        });
+                        chart.render();
                     });
                 } else {
                     setTimeout(worker, 5000);
