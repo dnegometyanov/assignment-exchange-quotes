@@ -30,8 +30,6 @@ class HistoricalQuotesTaskController
     public function createTask(Request $request, ValidatorInterface $validator, CommandBus $commandBus): JsonResponse
     {
         try {
-
-
             $command = new CreateHistoricalQuotesTaskCommand(
                 $request->get('symbol'),
                 $request->get('date_from'),

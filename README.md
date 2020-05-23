@@ -41,6 +41,23 @@ It's configured for doctrine transport bus, for the sake of simplicity, however 
  - Unit / Functional tests
  - Quotes pagination
 
+## API endpoints
+
+( See `App\Controller\Api\V1\HistoricalQuotesTaskController` )
+
+#### Create task API endpoint
+    POST /api/v1/task/
+
+    PARAMS: symbol, date_from, date_to, email
+
+    EXAMPLE 
+
+    POST /api/v1/task/ 
+        symbol=AMZN
+        date_from=2020-01-01
+        date_to=2020-01-31
+        email=email@example.com
+
 ## Project setup on the development machine
 
 #### Prerequisites
