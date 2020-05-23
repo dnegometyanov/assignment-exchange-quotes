@@ -62,6 +62,7 @@ class HistoricalQuotesTaskController
             return new JsonResponse(['errors' => [$e->getMessage()]], 400);
 
         }
+
         return new JsonResponse(['task_uuid' => $task->getUuid()]);
     }
 
@@ -86,7 +87,7 @@ class HistoricalQuotesTaskController
     }
 
     /**
-     * @Route("/{uuid}", methods={"GET"}, name="api_get_historical_quotes_task_quotes")
+     * @Route("/{uuid}/quotes", methods={"GET"}, name="api_get_historical_quotes_task_quotes")
      *
      * @param string $uuid
      * @param HistoricalQuotesTaskQueryInterface $historicalQuotesTaskQuery

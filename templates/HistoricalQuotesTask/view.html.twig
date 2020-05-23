@@ -1,2 +1,12 @@
-<h1>View quotes for task {{ uuid }}</h1>
-<input type="hidden" value="{{ uuid }}">
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>View quotes for task {{ uuid }}</h1>
+    <input type="hidden" id="path-status" value="{{ path('api_get_historical_quotes_task_status', {uuid: uuid}) }}">
+    <input type="hidden" id="path-quotes" value="{{ path('api_get_historical_quotes_task_quotes', {uuid: uuid}) }}">
+    <div id="wait">
+        <div class="spinner-border" role="status"></div>
+        Please wait - background workers are processing the quotes request ...
+    </div>
+    <table class="datatable"></table>
+{% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Command\CreateHistoricalQuotesTaskCommand;
+use App\Entity\HistoricalQuotesTask;
 use App\Form\Type\HistoricalQuotesTaskType;
 use League\Tactician\CommandBus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -51,9 +52,10 @@ class HistoricalQuotesTaskMonolithController extends AbstractController
 
             if (count($violations) === 0) {
 
-                $commandBus->handle($command);
+                /** @var HistoricalQuotesTask $task */
+                $task = $commandBus->handle($command);
 
-                return $this->redirectToRoute('view_historical_quotes_task', ['uuid' => 'some-uuid']);
+                return $this->redirectToRoute('view_historical_quotes_task', ['uuid' => $task->getUuid()]);
             }
 
             foreach ($violations as $violation) {

@@ -35,15 +35,17 @@ class HistoricalQuotesTaskType extends AbstractType
                         new NotBlank(),
                         new Date(),
                         new LessThanOrEqual((new \DateTimeImmutable())->format('Y-m-d'))
-                    ]
-                ])
+                    ],
+                    'data' => (new \DateTime("now"))->modify('- 1 month'),
+        ])
             ->add('dateTo', DateType::class,
                 [
                     'constraints' => [
                         new NotBlank(),
                         new Date(),
                         new LessThanOrEqual((new \DateTimeImmutable())->format('Y-m-d'))
-                    ]
+                    ],
+                    'data' => new \DateTime("now"),
                 ])
             ->add('email', EmailType::class,
                 [
